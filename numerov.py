@@ -24,7 +24,6 @@ class numerov(equation):
     def __call__(self):
         return ((12-10*self.f_n(self.n)) * self.y1-  self.f_n(self.n-1) * self.y0)    /self.f_n(self.n)
     
-"""  
-x=numerov(0, 0.00001, 1, , 0, 0.1)
-print(x)
-"""
+
+#x=numerov(0, 1E-10, 0,1,0,2000)
+#print(x)
