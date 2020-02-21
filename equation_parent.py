@@ -1,5 +1,8 @@
 from abc import abstractmethod
 class equation:
+    """
+    Parent class for all equation classes
+    """
     def __init__(self,name):
         self.name=name
         
@@ -8,7 +11,7 @@ class equation:
         pass
     
     def __repr__(self):
-        return self.name+"="+str(self.__call__())
+        return self.name+" = "+str(self.__call__())
 
 """
 class add(equation):
