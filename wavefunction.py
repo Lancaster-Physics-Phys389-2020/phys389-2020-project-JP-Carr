@@ -22,12 +22,26 @@ def function_value(edge0,edge1,energy,x):
 def find_E():
     trial_energy=start_energy
     energy_step=start_energy/10
-    wave_value=1e100
-    while True:
+    best_wave=1E100
+    tolerance =1E-50
+    
+    
+    while best_wave>tolerance:
         
-        if np.sign(function_value(initial_conditions[0],initial_conditions[1], trial_energy, 0))!=np.sign(wave_value):
+        trial_energy=+energy_step
+        wave_test=function_value(initial_conditions[0],initial_conditions[1], trial_energy, 0)
+        print("ψ = {}".format(wave_test))
+        if np.sign(wave_test)!=np.sign(best_wave):
             energy_step=-energy_step/2
-            wave_value=function_value(initial_conditions[0],initial_conditions[1], trial_energy, 0)
+            print("Overstep")
+            best_wave=function_value(initial_conditions[0],initial_conditions[1], trial_energy, 0)
+        elif abs(wave_test)>abs(best_wave):
+            energy_step=-energy_step
+            print("Reversing direction")
         
     
+    print(trial_energy)
     
+    
+#find_E()
+#print(type(function_value(initial_conditions[0],initial_conditions[1], start_energy, 0)))
