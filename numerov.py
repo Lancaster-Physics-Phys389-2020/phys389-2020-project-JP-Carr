@@ -11,7 +11,7 @@ class numerov(equation):
         self.E=E #Energy
         self.V=V #Potential
         self.delta_x=delta_x
-        self.y0=y0 #y_(n-1)
+        self.y0=y0 #y_(n-1)  - first value of ψ in intergration
         self.y1=y1 #y_n
         self.n=n
         

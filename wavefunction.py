@@ -2,7 +2,7 @@ from numerov import numerov
 from scipy import constants as const
 import numpy as np
 
-print(numerov(0, 1E-10, 0,1,0,2000))
+#print(numerov(0, 1E-10, 0,1,0,2000))
 start_energy=1
 initial_conditions=(0,1E-10)
 #wavefunction=[i for i in initial_conditions]
@@ -44,5 +44,5 @@ def find_E():
     print(trial_energy)
     
     
-function_value(0,1E-10,0,1)
+print(function_value(0,1E-10,0,1))
     
