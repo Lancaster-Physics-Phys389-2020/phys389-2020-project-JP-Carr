@@ -1,8 +1,8 @@
 from numerov import numerov
 from scipy import constants as const
 import numpy as np
-#x=numerov(0,0.0001,1,12,0,0.001)
 
+print(numerov(0, 1E-10, 0,1,0,2000))
 start_energy=1
 initial_conditions=(0,1E-10)
 #wavefunction=[i for i in initial_conditions]
@@ -15,6 +15,7 @@ def potential(x,k=1):
     return 1/2*k*x**2
 
 def function_value(edge0,edge1,energy,x):    
+    print(numerov(edge0,edge1,1,energy,potential(x),delta_x))
     return numerov(edge0,edge1,1,energy,potential(x),delta_x)
 
 #print (function_value(initial_conditions[0],initial_conditions[1],start_energy,0))
@@ -43,5 +44,5 @@ def find_E():
     print(trial_energy)
     
     
-#find_E()
-#print(type(function_value(initial_conditions[0],initial_conditions[1], start_energy, 0)))
+function_value(0,1E-10,0,1)
+    

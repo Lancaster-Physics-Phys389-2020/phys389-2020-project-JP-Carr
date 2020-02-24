@@ -26,4 +26,7 @@ class numerov(equation):
     
 
 #x=numerov(0, 1E-10, 0,1,0,2000)
+        
 #print(x)
+        
+#print(numerov(0, 1E-10, 0,1,0,2000))
