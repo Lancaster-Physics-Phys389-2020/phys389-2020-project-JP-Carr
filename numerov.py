@@ -15,6 +15,7 @@ class numerov(equation):
         self.y1=y1 #y_n
         self.n=n
         
+        
     def g_n(self,n=None):
         return (2*const.m_e/const.hbar**2)*(self.E-self.V)
    
@@ -22,11 +23,12 @@ class numerov(equation):
         return 1+self.g_n(n)*(self.delta_x**2/12)
     
     def __call__(self):
+
         return ((12-10*self.f_n(self.n)) * self.y1-  self.f_n(self.n-1) * self.y0)    /self.f_n(self.n)
     
 
-#x=numerov(0, 1E-10, 0,1,0,2000)
+#x=numerov(0, 1E-10, 0,1,0,0)
         
 #print(x)
         
-#print(numerov(0, 1E-10, 0,1,0,2000))
+#print(x(0, 1E-10, 0,1,0,2000))

@@ -6,13 +6,30 @@ initial_conditions=(0,1E-10) #(ψ₁,ψ₂)
 L=1 #length of potential V(x)≠0
 integration_step=L/1000
 step_num=round(1/L) #number of steps taken during integration
+tolerance=1E-10 #maximum error on ψ(L)=0
+wavefunction=[i for i in initial_conditions] #records the 
+energy_levels=[]
 
 def potential(x,k=1):
     """
     Returns harmonic potential V(x)
-
     """
     return 1/2*k*x**2
+
+
+print(numerov(initial_conditions[0],initial_conditions[1],0,1,potential(0.01),integration_step))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
