@@ -4,7 +4,7 @@ from scipy import constants as const
 class numerov(equation):
     """
     Numerical solution to time-independant Schrödinger equation for a quantum harmonic oscillator
-    Derivation at http://www.fisica.uniud.it/~giannozz/Corsi/MQ/LectureNotes/mq.pdf
+    Derivation at http://www.fisica.uniud.it/~giannozz/Corsi/MQ/LectureNotes/mq.pdf#page=14
     """
     def __init__(self,y0,y1,n,E,V,delta_x,name="Numerov’s formula"):
         super().__init__(name)
