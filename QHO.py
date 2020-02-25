@@ -1,4 +1,3 @@
-from potential import potential as V
 from scipy import constants as const
 import numpy as np
 
@@ -21,7 +20,9 @@ class quantum_harmonic_oscilator:
     
     def next_wavevalue(self,potential0,potential_minus1,potential_minus2): #potential0 for current value of x
         psi=((12-10*self.f_n(potential_minus1)) * self.wavefunction[-1]-  self.f_n(potential_minus2) * self.wavefunction[-2])    /self.f_n(potential0)
-        self.wavefunction.append(psi)
+        print(psi)
+        self.wavefunction=np.append(self.wavefunction,psi)
+        #print(self.wavefunction)
         return psi
     #--------------------------------------------------------------------
 
