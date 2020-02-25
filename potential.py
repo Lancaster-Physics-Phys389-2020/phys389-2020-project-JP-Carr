@@ -15,7 +15,7 @@ class potential:
         if self.form=="ISW": #infinte square well   
             V=0
         
-        if x<=self.lower_limit or x>=self.upper_limit:
+        if position<=self.lower_limit or position>=self.upper_limit:
             return infinity_approximation
         else:
             return V.subs(x,position)
