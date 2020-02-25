@@ -23,9 +23,9 @@ class quantum_harmonic_oscilator:
         psi=((12-10*self.f_n(potential_minus1)) * self.wavefunction[-1]-  self.f_n(potential_minus2) * self.wavefunction[-2])    /self.f_n(potential0)
         self.wavefunction.append(psi)
         return psi
+    #--------------------------------------------------------------------
 
-
-
+"""
 x=quantum_harmonic_oscilator(0.5, 1, 0.005)
 v=V(0,1)
 v0,v1,v2=v.V(x.position),v.V(x.position-x.delta_x),v.V(x.position-2*x.delta_x)
@@ -33,3 +33,4 @@ v0,v1,v2=v.V(x.position),v.V(x.position-x.delta_x),v.V(x.position-2*x.delta_x)
 
 
 print(x.next_wavevalue(v0,v1,v2))
+"""
