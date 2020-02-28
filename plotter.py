@@ -12,7 +12,7 @@ def plot(x,y,title,x_lab,y_lab,path=None,error_list=None):
     plt.ylim(bottom=0)
     plt.ylim(top=max(y))
     """
-    plt.xlim(left=0)
+    plt.xlim(left=min(x)*1.1)
     plt.xlim(right=max(x)*1.1)
     plt.title(title)
     plt.xlabel(x_lab)
