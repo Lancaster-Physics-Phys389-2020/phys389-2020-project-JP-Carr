@@ -38,8 +38,6 @@ class quantum_harmonic_oscilator:
         return psi
     #--------------------------------------------------------------------
 
-    def next_wavevalue2(self,potential0,potential_minus1,potential_minus2):
-        return
 
 
 """
