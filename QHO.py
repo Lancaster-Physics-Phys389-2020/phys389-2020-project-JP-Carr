@@ -1,6 +1,6 @@
 from scipy import constants as const
 import numpy as np
-
+"""
 class quantum_harmonic_oscilator:
     def __init__(self,start_position,trial_energy,delta_x,mass=const.m_e):
         self.position=start_position
@@ -23,12 +23,12 @@ class quantum_harmonic_oscilator:
         return 1+self.g_n(potential)*((self.delta_x**2)/12)
     
     def next_wavevalue(self,potential0,potential_minus1,potential_minus2): #potential0 for current value of x
-        """
+
         print(format((12-10*self.f_n(potential_minus1)) * self.wavefunction[-1],"1.1E"))
         print(format(self.f_n(potential_minus2) * self.wavefunction[-2],"1.1E"))
         print(format(self.f_n(potential0),"1.1E"))
         print("----------------------------------------------------------------------")
-        """
+
         psi=((12-10*self.f_n(potential_minus1)) * self.wavefunction[-1]-  self.f_n(potential_minus2) * self.wavefunction[-2])    /self.f_n(potential0)
       #  psi=2*self.wavefunction[-1]*(1-5*self.delta_x)
         #print(psi)
@@ -37,6 +37,34 @@ class quantum_harmonic_oscilator:
         #print(self.wavefunction)
         return psi
     #--------------------------------------------------------------------
+"""
+
+class quantum_harmonic_oscilator:
+    def __init__(self,trial_energy,well_depth,steps,start_position=0,mass=const.m_e):
+        self.trial_energy=trial_energy
+        self.well_depth=well_depth
+        self.steps=steps
+        self.start_position=start_position
+        self.mass=mass
+        self.wavefunction=np.array([0,1E-5])
+        #UNITLESS VARIABLES
+        self.epsilon=self.trial_energy/self.well_depth
+        self.l=1/(self.steps-1)
+        self.length=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -48,4 +76,5 @@ v0,v1,v2=v.V(x.position),v.V(x.position-x.delta_x),v.V(x.position-2*x.delta_x)
 
 
 print(x.next_wavevalue(v0,v1,v2))
+
 """

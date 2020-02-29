@@ -1,11 +1,15 @@
 from sympy import symbols
-
+import numpy as np
+"""
 class potential:
-    def __init__(self,lower_limit,upper_limit,form="harmonic",k=1):
+    def __init__(self,lower_limit,upper_limit,form="ISW",k=1):
         self.form=form
         self.k=k
         self.lower_limit=lower_limit #points at which V(x)=∞
         self.upper_limit=upper_limit
+        
+        if self.form=="ISW":
+            return np.array([-1 for i in range])
             
     def V(self,position):
       #  print(position)
@@ -22,6 +26,22 @@ class potential:
         else:
            # print("finite potential")
             return V.subs(x,position)
+"""        
+        
+class potential:
+    def __init__(self,steps,form="ISW"):
+        self.form=form
+        self.steps=steps
+        
+        if self.form=="ISW":
+            self.V=np.array([-1 for i in range(steps)])
+   
+        
+    def V_min(self):
+        return np.min(self.V)
+    
+    def nu(self):
+        return self.V/self.V_min()
         
         
 """
