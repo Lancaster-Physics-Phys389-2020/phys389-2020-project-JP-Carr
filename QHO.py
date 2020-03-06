@@ -55,15 +55,21 @@ class quantum_harmonic_oscilator:
         self.l=1/(self.steps-1)                          #step length
         self.gamma=(2*self.mass*self.length**2*self.well_depth/const.hbar**2)**0.5
         
-    def next_psi(self,nu_array,iteration):
+    def next_psi(self,nu_array,n):  #n - iteration starts at 2
         for nu in nu_array:
             if nu<self.epsilon:
-                error("√ε-ν ∉ℝ")
+                error("nu < epsilon")
         else:
             k=self.gamma*np.power(self.epsilon-nu_array,0.5)
         
         
+        a=2(1-5/12*self.l**2*k[n-1]**2)*self.wavefunction[n-1]
+        b=(1+1/12*self.l**2*k[n-2]**2)*self.wavefunction[n-2]
+        c=1+1/12*self.l**2*k[n]
         
+        psi_n=(a-b)/c
+        
+        np.append(self.wavefunction,psi_n)
 
 
 
