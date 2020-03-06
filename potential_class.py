@@ -30,6 +30,21 @@ class potential:
         
 class potential:
     def __init__(self,steps,form="ISW"):
+        """
+        Initialises potential field and generates potential array
+
+        Parameters
+        ----------
+        steps : int
+            Number of integration points used in the calculation of wavefunction.
+        form : str, optional
+            Describes the shape of the potential. The default is "ISW".
+
+        Returns
+        -------
+        None.
+
+        """
         self.form=form
         self.steps=steps
         
@@ -38,10 +53,30 @@ class potential:
    
         
     def V_min(self):
-        return np.min(self.V)
+        """
+        Finds the minimum value in the potential array
+
+        Returns
+        -------
+        min_V : float
+            The minimum potential value.
+
+        """
+        min_V=np.min(self.V)
+        return min_V
     
     def nu(self):
-        return self.V/self.V_min()
+        """
+        Calculates nondimensionalised potential nu
+
+        Returns
+        -------
+        nu_array : numpy.ndarray
+            An array of nondimensionalised potential.
+
+        """
+        nu_array=self.V/self.V_min()
+        return nu_array
         
         
 """

@@ -42,6 +42,29 @@ class quantum_harmonic_oscilator:
 
 class quantum_harmonic_oscilator:
     def __init__(self,trial_energy,well_depth,length,steps,start_position=0,mass=const.m_e):
+        """
+        Initialises QHO
+
+        Parameters
+        ----------
+        trial_energy : float
+            Energy of oscillator for current attempt.
+        well_depth : float
+            Minimum potential of the well.
+        length : float
+            Distance over which the wavefunction is to be calculated.
+        steps : int
+            Number of integration points used.
+        start_position : TYPE, optional
+            DESCRIPTION. The default is 0.
+        mass : float, optional
+            DESCRIPTION. The default is const.m_e.
+
+        Returns
+        -------
+        None.
+
+        """
         self.trial_energy=trial_energy
         self.well_depth=well_depth
         self.steps=steps
@@ -56,6 +79,7 @@ class quantum_harmonic_oscilator:
         self.gamma=(2*self.mass*self.length**2*self.well_depth/const.hbar**2)**0.5
         
     def next_psi(self,nu_array,n):  #n - iteration starts at 2
+        
         for nu in nu_array:
             if nu<self.epsilon:
                 error("nu < epsilon")
