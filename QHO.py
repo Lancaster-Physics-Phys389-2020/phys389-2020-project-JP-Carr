@@ -1,5 +1,6 @@
 from scipy import constants as const
 import numpy as np
+from error import error
 """
 class quantum_harmonic_oscilator:
     def __init__(self,start_position,trial_energy,delta_x,mass=const.m_e):
@@ -40,17 +41,29 @@ class quantum_harmonic_oscilator:
 """
 
 class quantum_harmonic_oscilator:
-    def __init__(self,trial_energy,well_depth,steps,start_position=0,mass=const.m_e):
+    def __init__(self,trial_energy,well_depth,length,steps,start_position=0,mass=const.m_e):
         self.trial_energy=trial_energy
         self.well_depth=well_depth
         self.steps=steps
         self.start_position=start_position
         self.mass=mass
         self.wavefunction=np.array([0,1E-5])
+        self.length=length
+        
         #UNITLESS VARIABLES
-        self.epsilon=self.trial_energy/self.well_depth
-        self.l=1/(self.steps-1)
-        self.length=
+        self.epsilon=self.trial_energy/self.well_depth    #unitless energy
+        self.l=1/(self.steps-1)                          #step length
+        self.gamma=(2*self.mass*self.length**2*self.well_depth/const.hbar**2)**0.5
+        
+    def next_psi(self,nu_array,iteration):
+        for nu in nu_array:
+            if nu<self.epsilon:
+                error("√ε-ν ∉ℝ")
+        else:
+            k=self.gamma*np.power(self.epsilon-nu_array,0.5)
+        
+        
+        
 
 
 
