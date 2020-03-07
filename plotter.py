@@ -5,7 +5,30 @@ import matplotlib.pyplot as plt
 
 
 #PLOTS PARTICLE POSITION AS STATIC GRAPH
-def plot(x,y,title,x_lab,y_lab,path=None,error_list=None):
+def plot(x,y,title,x_lab,y_lab,path=None):
+    """
+    
+
+    Parameters
+    ----------
+    x : list/numpy.ndarray
+        Values to be plotted along the x-axis.
+    y : list/numpy.ndarray
+        Values to be plotted along the y-axis.
+    title : str
+        Title of the plot.
+    x_lab : str
+        x-axis label.
+    y_lab : str
+        y-axis label.
+    path : str, optional
+        Directory for saving plot as a png. The default is None.
+
+    Returns
+    -------
+    None.
+
+    """
     #Outputs or saves a single Cartesian plot from 2 arrays
     plt.figure(figsize=(7,7))
     """
