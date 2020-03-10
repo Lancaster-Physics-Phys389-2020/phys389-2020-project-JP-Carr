@@ -76,24 +76,33 @@ class quantum_harmonic_oscilator:
         #UNITLESS VARIABLES
         self.epsilon=self.trial_energy/self.well_depth    #unitless energy
         self.l=1/(self.steps-1)                          #step length
-        self.gamma=(2*self.mass*self.length**2*self.well_depth/const.hbar**2)**0.5
+        self.gamma_sq=200#2*self.mass*(self.length**2)*self.well_depth/(const.hbar**2)
+      #  print(self.mass,self.length,self.well_depth,const.hbar)
+     #   print("γ² = "+str(self.gamma_sq))
         
     def next_psi(self,nu_array,n):  #n - iteration starts at 2
         
         for nu in nu_array:
-            if nu<self.epsilon:
-                error("nu < epsilon")
+            if self.epsilon-nu<0:
+                print(self.epsilon,nu)
+                error("epsilon - nu < 0")
         else:
-            k=self.gamma*np.power(self.epsilon-nu_array,0.5)
+       #     print(self.gamma,np.power(self.epsilon-nu_array,0.5))
+            k_sq=self.gamma_sq*(self.epsilon-nu_array)
+         #   print(k_sq)
         
+     #   print(self.l**2,k_sq[n-1],self.wavefunction[n-1])
         
-        a=2(1-5/12*self.l**2*k[n-1]**2)*self.wavefunction[n-1]
-        b=(1+1/12*self.l**2*k[n-2]**2)*self.wavefunction[n-2]
-        c=1+1/12*self.l**2*k[n]
+        a=2*(1-5/12*(self.l**2)*k_sq[n-1])*self.wavefunction[n-1]
+      #  print(a)
+        b=(1+1/12*self.l**2*k_sq[n-2])*self.wavefunction[n-2]
+        c=1+1/12*self.l**2*k_sq[n]
         
         psi_n=(a-b)/c
         
-        np.append(self.wavefunction,psi_n)
+        self.wavefunction=np.append(self.wavefunction,psi_n)
+      #  print("ψ {}".format(len(self.wavefunction)))
+
 
 
 
