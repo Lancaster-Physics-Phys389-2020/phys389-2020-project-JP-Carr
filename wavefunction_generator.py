@@ -31,17 +31,12 @@ def turn_points(array):
 
 
 def WF_attempt(trial_E=start_E):
-    global out 
     QHO=quantum_harmonic_oscilator(trial_E,V.V_depth(),well_length,N)
   #  print("New wavefunction")
     
     for i in range(2,N):
     #    print("Loop  i = {}".format(i))
         QHO.next_psi(V.nu(), i)
-    
-    
-   # plt.plot(x_array,QHO.wavefunction)
-    out=QHO.wavefunction
     return QHO.wavefunction
     
 def E_finder(inital_E=start_E):
