@@ -8,16 +8,15 @@ import multiprocessing
 import time
 import pandas as pd
 
-
 start=time.time()
 
-N=round(1000/2) #endures N is always an int
+N=round(1000) #endures N is always an int
 well_length=1
 x_array=np.linspace(-well_length/2,well_length/2,N)
 start_E=0.21#0.95#065197799
-E_list=[]
+E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
 psi_tolerance=1E-12
-
+data_dict={"n":[], "epsilon":[]}
 
 
 V=potential(N)
@@ -46,38 +45,46 @@ def E_finder(inital_E=start_E):
     last_psi=copy.deepcopy(best_psi)
     
     while abs(best_psi)>psi_tolerance:
-        print("-----------------------")
+     #   print("-----------------------")
        # print("loop")
         trial_E+=delta_E
         test_wave=WF_attempt(trial_E)
         test_wave_L=test_wave[-1]
-        print("last ψ={}     trial ψ={}".format(last_psi,test_wave_L))
-        print("E = "+str(trial_E))
+    #    print("last ψ={}     trial ψ={}".format(last_psi,test_wave_L))
+   #     print("E = "+str(trial_E))
         
         
         if abs(test_wave_L)>abs(best_psi):
             delta_E=-delta_E
-            print("Worse - Reversing direction")            
+     #       print("Worse - Reversing direction")            
 
         else:
-            print("Improvement")
+     #       print("Improvement")
             best_psi=test_wave_L
             
             if np.sign(test_wave_L)!=np.sign(last_psi):
                 delta_E=delta_E/2
-                print("Overstep")
+       #         print("Overstep")
                 #best_psi=test_wave_L
         last_psi=copy.deepcopy(test_wave_L)
     else:
         print("Value found: E = {}\n ψ(L) = {}".format(trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
       #  print(turn_points(last_psi))
-        return trial_E,test_wave,turn_points(test_wave)
+        n=turn_points(test_wave)
+        data_dict["n"].append(n)
+        data_dict["epsilon"].append(trial_E)
+        return trial_E,test_wave,n
     
     
 #WF_attempt()
-    
-a,b,c=E_finder()
-print(c)
-
-plt.plot(x_array,b)
-print("Time elapsed = {}s".format(time.time()-start))
+plt.figure("Wavefunctions")
+for energy in E_list:
+    print("loop")
+    a,b,c=E_finder(energy)
+    plt.plot(x_array,b)
+plt.xlabel("x")
+plt.ylabel("ψ")
+plt.show()
+df=pd.DataFrame(data=data_dict)
+pd.DataFrame.to_csv(df, "energy_levels.csv")
+print("Time elapsed = {}s".format(round(time.time()-start,2)))
