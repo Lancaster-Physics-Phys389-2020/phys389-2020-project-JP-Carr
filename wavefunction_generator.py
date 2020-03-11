@@ -10,7 +10,7 @@ import pandas as pd
 
 start=time.time()
 
-N=round(1000) #endures N is always an int
+N=round(1000/2) #endures N is always an int
 well_length=1
 x_array=np.linspace(-well_length/2,well_length/2,N)
 start_E=0.21#0.95#065197799
@@ -22,6 +22,20 @@ data_dict={"n":[], "epsilon":[]}
 V=potential(N)
 
 def turn_points(array):
+    """
+    Counts the number of turning points in an array
+
+    Parameters
+    ----------
+    array : numpy.ndarray
+        Array of values to be processed.
+
+    Returns
+    -------
+    n : int
+        Number of turning points.
+
+    """
     n=0
     for i in range(1,len(array)-1):
         if (array[i]<array[i-1] and array[i]<array[i+1]) or (array[i]>array[i-1] and array[i]>array[i+1]):
