@@ -4,13 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotter
 import copy
-import multiprocessing
+#import multiprocessing
 import time
 import pandas as pd
+from error import error
+import multiprocess_generator as mpg
 
 start=time.time()
 
-N=round(1000/2) #endures N is always an int
+N=round(1000) #endures N is always an int
+
+
+
 well_length=1
 x_array=np.linspace(-well_length/2,well_length/2,N)
 start_E=0.21#0.95#065197799
@@ -90,16 +95,47 @@ def E_finder(inital_E=start_E):
         return trial_E,test_wave,n
     
     
+def run(i):
+    global N
+    global x_array
+    N=i*50
+    x_array=np.linspace(-well_length/2,well_length/2,N)
+    plt.figure("Wavefunctions (N = {})".format(N))
+    for energy in E_list:
+        #print("loop")
+        a,b,c=E_finder(energy)
+        plt.plot(x_array,b)
+    
+    plt.xlabel("x")
+    plt.ylabel("ψ")
+    plt.show()
+    df=pd.DataFrame(data=data_dict)
+    try:
+        pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
+        print("Saved \"energy_levels_N={}.csv\"".format(N))
+    except:
+        error("Unable to save csv",False)
+    
+"""    
 #WF_attempt()
-plt.figure("Wavefunctions")
+#plt.figure("Wavefunctions")
 for energy in E_list:
     #print("loop")
     a,b,c=E_finder(energy)
-    plt.plot(x_array,b)
+ #   plt.plot(x_array,b)
 
-plt.xlabel("x")
-plt.ylabel("ψ")
-plt.show()
+#plt.xlabel("x")
+#plt.ylabel("ψ")
+#plt.show()
 df=pd.DataFrame(data=data_dict)
-pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
-print("Time elapsed = {}s".format(round(time.time()-start,2)))
+try:
+    pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
+    print("Saved \"energy_levels_N={}.csv\"".format(N))
+except:
+    error("Unable to save csv",False)
+"""
+
+if __name__=="__main__":
+    run(N/50)
+    print("Time elapsed = {}s".format(round(time.time()-start,2)))
+    print("\a")
