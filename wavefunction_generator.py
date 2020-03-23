@@ -3,26 +3,25 @@ from QHO import quantum_harmonic_oscilator
 import numpy as np
 import matplotlib.pyplot as plt
 import copy
-import time
 import pandas as pd
 from error import error
 
 
-start=time.time()
-
-N=round(1000/4) #endures N is always an int
-
 
 
 well_length=1
-x_array=np.linspace(-well_length/2,well_length/2,N)
 start_E=0.21#0.95#065197799
 E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
 psi_tolerance=1E-12
 data_dict={"n":[], "epsilon":[]}
 
+if __name__=="__main__":
+    import time
+    start=time.time()
+    N=round(50*20) #endures N is always an int
+    x_array=np.linspace(-well_length/2,well_length/2,N)
+    V=potential(N)
 
-V=potential(N)
 
 def turn_points(array):
     """
@@ -96,27 +95,31 @@ def E_finder(inital_E=start_E):
 def run(i):
     global N
     global x_array
-    N=i*50
+    global V
+    N=round(i*50)
     x_array=np.linspace(-well_length/2,well_length/2,N)
+    V=potential(N)
+    print("running N={}".format(N))
+    
     plt.figure("Wavefunctions (N = {})".format(N))
     for energy in E_list:
         #print("loop")
         E,psi,n=E_finder(energy)
-        plt.plot(x_array,psi, label="n=".format(n))
+   #     plt.plot(x_array,psi, label="n=".format(n))
     
-    plt.xlabel("x")
-    plt.ylabel("ψ")
-    plt.legend()
-    plt.show()
+   # plt.xlabel("x")
+   # plt.ylabel("ψ")
+   # plt.legend()
+  #y  plt.show()
     df=pd.DataFrame(data=data_dict)
+    df.index.name=str(N)
     try:
         pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
         error("Unable to save csv",False)
 
-
 if __name__=="__main__":
-    run(round(N/50))
+    run(N/50)
     print("Time elapsed = {}s".format(round(time.time()-start,2)))
     print("\a")
