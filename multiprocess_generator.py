@@ -3,7 +3,7 @@ import multiprocessing as mp
 import time
 
 start=time.time()
-simulations = 8 #Number of simulations to run (NOTE: Each successive simulation takes longer to run)
+simulations = 20 #Number of simulations to run (NOTE: Each successive simulation takes longer to run, 20~15mins for 8 logical processors)
 
 
 if __name__ == "__main__":  # Allows for the safe importing of the main module
