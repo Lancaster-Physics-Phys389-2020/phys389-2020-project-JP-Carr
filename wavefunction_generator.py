@@ -46,6 +46,21 @@ def turn_points(array):
 
 
 def WF_attempt(trial_E=start_E):
+    """
+    Creates a Quantum Harmonic Oscillator object and attempts to 
+    produce a valid wavefunction using Numerov's formula
+
+    Parameters
+    ----------
+    trial_E : float, optional
+        The dimentionless energy for this attempt. The default is start_E.
+
+    Returns
+    -------
+    QHO.wavefunction: numpy.ndarray
+        Final wavefunction attempt.
+
+    """
     QHO=quantum_harmonic_oscilator(trial_E,V.V_depth(),well_length,N)
   #  print("New wavefunction")
     
@@ -112,6 +127,11 @@ def run(i):
    # plt.legend()
   #y  plt.show()
     df=pd.DataFrame(data=data_dict)
+    row_limit=len(E_list)
+    if df.shape[0]>row_limit: #catches extra iterations
+        rfd=[i for i in range(row_limit,df.shape[0])] #Rows For Deletion
+        df.drop(rfd,inplace=True)
+    
     df.index.name=str(N)
     try:
         pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
