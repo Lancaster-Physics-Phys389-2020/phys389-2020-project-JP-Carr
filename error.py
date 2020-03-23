@@ -1,6 +1,4 @@
-import sys
-
-def error(message):
+def error(message,_exit=True):
     """
     Displays error message and ends the current script
 
@@ -8,11 +6,17 @@ def error(message):
     ----------
     message : str
         Error message to be displayed.
+    
+    _error : bool
+        Exit main script?
 
     Returns
     -------
     None.
 
     """
-    print("ERROR: "+message)
-    sys.exit()
+    print("_______________________________________")
+    print("\033[31mERROR: "+message)
+    if _exit==True:
+        from sys import exit
+        exit()

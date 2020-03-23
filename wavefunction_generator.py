@@ -93,9 +93,10 @@ def E_finder(inital_E=start_E):
 #WF_attempt()
 plt.figure("Wavefunctions")
 for energy in E_list:
-    print("loop")
+    #print("loop")
     a,b,c=E_finder(energy)
     plt.plot(x_array,b)
+
 plt.xlabel("x")
 plt.ylabel("ψ")
 plt.show()
