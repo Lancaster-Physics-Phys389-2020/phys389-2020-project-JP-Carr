@@ -2,17 +2,15 @@ from potential_class import potential
 from QHO import quantum_harmonic_oscilator 
 import numpy as np
 import matplotlib.pyplot as plt
-import plotter
 import copy
-#import multiprocessing
 import time
 import pandas as pd
 from error import error
-import multiprocess_generator as mpg
+
 
 start=time.time()
 
-N=round(1000) #endures N is always an int
+N=round(1000/4) #endures N is always an int
 
 
 
@@ -103,11 +101,12 @@ def run(i):
     plt.figure("Wavefunctions (N = {})".format(N))
     for energy in E_list:
         #print("loop")
-        a,b,c=E_finder(energy)
-        plt.plot(x_array,b)
+        E,psi,n=E_finder(energy)
+        plt.plot(x_array,psi, label="n=".format(n))
     
     plt.xlabel("x")
     plt.ylabel("ψ")
+    plt.legend()
     plt.show()
     df=pd.DataFrame(data=data_dict)
     try:
@@ -115,27 +114,9 @@ def run(i):
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
         error("Unable to save csv",False)
-    
-"""    
-#WF_attempt()
-#plt.figure("Wavefunctions")
-for energy in E_list:
-    #print("loop")
-    a,b,c=E_finder(energy)
- #   plt.plot(x_array,b)
 
-#plt.xlabel("x")
-#plt.ylabel("ψ")
-#plt.show()
-df=pd.DataFrame(data=data_dict)
-try:
-    pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
-    print("Saved \"energy_levels_N={}.csv\"".format(N))
-except:
-    error("Unable to save csv",False)
-"""
 
 if __name__=="__main__":
-    run(N/50)
+    run(round(N/50))
     print("Time elapsed = {}s".format(round(time.time()-start,2)))
     print("\a")
