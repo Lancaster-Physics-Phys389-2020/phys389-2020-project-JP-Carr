@@ -13,12 +13,13 @@ well_length=1
 start_E=0.21#0.95#065197799
 E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
 psi_tolerance=1E-12
-data_dict={"n":[], "epsilon":[]}
+psi_dict={}
+energy_dict={"n":[], "epsilon":[]}
 
 if __name__=="__main__":
     import time
     start=time.time()
-    N=round(50*20) #endures N is always an int
+    N=round(49)#50*20) #endures N is always an int
     x_array=np.linspace(-well_length/2,well_length/2,N)
     V=potential(N)
 
@@ -102,8 +103,9 @@ def E_finder(inital_E=start_E):
         print("Value found: E = {}\n ψ(L) = {}".format(trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
       #  print(turn_points(last_psi))
         n=turn_points(test_wave)
-        data_dict["n"].append(n)
-        data_dict["epsilon"].append(trial_E)
+        energy_dict["n"].append(n)
+        energy_dict["epsilon"].append(trial_E)
+        psi_dict[str(n)]=test_wave
         return trial_E,test_wave,n
     
     
@@ -120,25 +122,37 @@ def run(i):
     for energy in E_list:
         #print("loop")
         E,psi,n=E_finder(energy)
-   #     plt.plot(x_array,psi, label="n=".format(n))
+        plt.plot(x_array,psi, label="n={}".format(n))
     
-   # plt.xlabel("x")
-   # plt.ylabel("ψ")
-   # plt.legend()
-  #y  plt.show()
-    df=pd.DataFrame(data=data_dict)
+    plt.xlabel("x")
+    plt.ylabel("ψ")
+    plt.legend()
+    plt.show()
+    
+    
+    
+    
+    energy_df=pd.DataFrame(data=energy_dict)
+    psi_df=pd.DataFrame(data=psi_dict)
     row_limit=len(E_list)
-    if df.shape[0]>row_limit: #catches extra iterations
-        rfd=[i for i in range(row_limit,df.shape[0])] #Rows For Deletion
-        df.drop(rfd,inplace=True)
+    if energy_df.shape[0]>row_limit: #catches extra iterations
+        rfd=[i for i in range(row_limit,energy_df.shape[0])] #Rows For Deletion
+        energy_df.drop(rfd,inplace=True)
     
-    df.index.name=str(N)
+    energy_df.index.name=str(N)
+    psi_df
     try:
-        pd.DataFrame.to_csv(df, "energy_levels\energy_levels_N={}.csv".format(N))
+        pd.DataFrame.to_csv(energy_df, "energy_levels\energy_levels_N={}.csv".format(N))
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
-        error("Unable to save csv",False)
+        error("Unable to save \"energy_levels_N={}.csv\"",False)
 
+    try:
+        pd.DataFrame.to_csv(psi_df, "wavefunctions\wavefunctions_N={}.csv".format(N))
+        print("Saved \"wavefunctions_N={}.csv\"".format(N))
+    except:
+        error("Unable to save \"wavefunctions_N={}.csv\"",False)
+        
 if __name__=="__main__":
     run(N/50)
     print("Time elapsed = {}s".format(round(time.time()-start,2)))
