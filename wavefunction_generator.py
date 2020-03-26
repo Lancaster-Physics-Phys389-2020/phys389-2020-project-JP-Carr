@@ -19,7 +19,7 @@ energy_dict={"n":[], "epsilon":[]}
 if __name__=="__main__":
     import time
     start=time.time()
-    N=round(49)#50*20) #endures N is always an int
+    N=round(50*20) #endures N is always an int
     x_array=np.linspace(-well_length/2,well_length/2,N)
     V=potential(N)
 
@@ -100,9 +100,9 @@ def E_finder(inital_E=start_E):
                 #best_psi=test_wave_L
         last_psi=copy.deepcopy(test_wave_L)
     else:
-        print("Value found: E = {}\n ψ(L) = {}".format(trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
-      #  print(turn_points(last_psi))
         n=turn_points(test_wave)
+        print("Value found(n = {}): E = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
+      #  print(turn_points(last_psi))
         energy_dict["n"].append(n)
         energy_dict["epsilon"].append(trial_E)
         psi_dict[str(n)]=test_wave
@@ -118,16 +118,16 @@ def run(i):
     V=potential(N)
     print("running N={}".format(N))
     
-    plt.figure("Wavefunctions (N = {})".format(N))
+   # plt.figure("Wavefunctions (N = {})".format(N))
     for energy in E_list:
         #print("loop")
         E,psi,n=E_finder(energy)
-        plt.plot(x_array,psi, label="n={}".format(n))
+     #   plt.plot(x_array,psi, label="n={}".format(n))
     
-    plt.xlabel("x")
-    plt.ylabel("ψ")
-    plt.legend()
-    plt.show()
+  #  plt.xlabel("x")
+   # plt.ylabel("ψ")
+    #plt.legend()
+    #plt.show()
     
     
     
