@@ -81,7 +81,6 @@ class quantum_harmonic_oscilator:
      #   print("γ² = "+str(self.gamma_sq))
         
     def next_psi(self,nu_array,n):  #n - iteration starts at 2
-        
         for nu in nu_array:
             if self.epsilon-nu<0:
                 print(self.epsilon,nu)
@@ -102,7 +101,7 @@ class quantum_harmonic_oscilator:
         
         self.wavefunction=np.append(self.wavefunction,psi_n)
       #  print("ψ {}".format(len(self.wavefunction)))
-
+        return psi_n
 
 
 
