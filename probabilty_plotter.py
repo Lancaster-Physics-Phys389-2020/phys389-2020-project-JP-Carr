@@ -4,6 +4,10 @@ from os import listdir
 import pandas as pd
 from error import error
 
+def normalise(array):
+    integral=np.trapz(array,x=x_array)
+    const=array/integral
+    return const*array
 
 try:
     wave_function_csv="wavefunctions_N=1000.csv"#listdir("wavefunctions")[0]  #temporary
@@ -21,16 +25,11 @@ plt.figure("Probability (N={})".format(N))
     
 plt.xlabel(r"$\tilde{x}$")
 plt.ylabel(r"$P(\tilde{x})$")
-  
+#plt.plot(x_array,normalise(data[str(1)]**2), label="n="+str(1)) 
 i=1 
 while 1:
-    try:
-        prob=data[str(i)]**2
-        integral=np.trapz(prob,x=x_array)
-        prob_norm=prob/integral
-        print(np.trapz(prob_norm,x=x_array))
-        
-        plt.plot(x_array,prob_norm, label="n="+str(i))
+    try:      
+        plt.plot(x_array,normalise(data[str(i)]**2), label="n="+str(i))
         i+=1
     except:
         break
