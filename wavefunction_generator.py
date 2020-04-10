@@ -14,7 +14,7 @@ start_E=0.21#0.95#065197799
 E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
 psi_tolerance=1E-12
 psi_dict={}
-energy_dict={"n":[], "epsilon":[]}
+
 
 if __name__=="__main__":
     import time
@@ -68,7 +68,9 @@ def WF_attempt(trial_E=start_E):
     for i in range(2,N):
     #    print("Loop  i = {}".format(i))
         QHO.next_psi(V.nu(), i)
-    return QHO.wavefunction
+    wave=copy.deepcopy(QHO.wavefunction)
+    del QHO
+    return wave
     
 def E_finder(inital_E=start_E):
     trial_E=inital_E
@@ -101,7 +103,7 @@ def E_finder(inital_E=start_E):
         last_psi=copy.deepcopy(test_wave_L)
     else:
         n=turn_points(test_wave)
-        print("Value found(n = {}): E = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
+        print("Value found (n={}): \nE = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
       #  print(turn_points(last_psi))
         energy_dict["n"].append(n)
         energy_dict["epsilon"].append(trial_E)
@@ -113,9 +115,11 @@ def run(i):
     global N
     global x_array
     global V
+    global energy_dict
     N=round(i*50)
     x_array=np.linspace(-well_length/2,well_length/2,N)
     V=potential(N)
+    energy_dict={"n":[], "epsilon":[]}
     print("running N={}".format(N))
     
    # plt.figure("Wavefunctions (N = {})".format(N))
@@ -146,12 +150,13 @@ def run(i):
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
         error("Unable to save \"energy_levels_N={}.csv\"",False)
-
+    del energy_df
     try:
         pd.DataFrame.to_csv(psi_df, "wavefunctions\wavefunctions_N={}.csv".format(N))
         print("Saved \"wavefunctions_N={}.csv\"".format(N))
     except:
         error("Unable to save \"wavefunctions_N={}.csv\"",False)
+    del psi_df
         
 if __name__=="__main__":
     run(N/50)
