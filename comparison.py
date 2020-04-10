@@ -36,6 +36,7 @@ for i in dic:
     plt.plot(x,y, label="N="+i)
     plt.xlabel("n")
     plt.ylabel(r"$\epsilon_{numerical}/\epsilon_{analytical}$")
+    plt.tick_params(which='both',direction='in',right=True,top=True)
     #plt.ylabel(r"$\frac{\epsilon_{numerical}}{\epsilon_{analytical}}$")
     plt.legend()
     plt.show()
