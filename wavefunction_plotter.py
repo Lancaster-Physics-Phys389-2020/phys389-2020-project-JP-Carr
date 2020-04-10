@@ -25,6 +25,6 @@ while 1:
     except:
         break
     
-    
+plt.tick_params(which='both',direction='in',right=True,top=True)
 plt.legend()
 plt.show()
