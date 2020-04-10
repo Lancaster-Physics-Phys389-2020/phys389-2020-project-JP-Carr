@@ -19,8 +19,8 @@ x_array=np.linspace(-1/2,1/2,N)
 
 plt.figure("Probability (N={})".format(N))
     
-plt.xlabel("x")
-plt.ylabel("P(x)")
+plt.xlabel(r"$\tilde{x}$")
+plt.ylabel(r"$P(\tilde{x})$")
   
 i=1 
 while 1:

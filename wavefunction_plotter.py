@@ -21,8 +21,8 @@ x_array=np.linspace(-1/2,1/2,N)
 
 plt.figure("Wavefunctions (N={})".format(N))
     
-plt.xlabel("x")
-plt.ylabel("ψ(x)")
+plt.xlabel(r"$\tilde{x}$")
+plt.ylabel(r"$\psi\tilde{x}$")
   
 i=1 
 while 1:
