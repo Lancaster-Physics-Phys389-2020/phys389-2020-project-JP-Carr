@@ -18,7 +18,7 @@ psi_dict={}
 if __name__=="__main__":
     import time
     start=time.time()
-    N=round(50*20) #endures N is always an int
+    N=round(50*20) #ensures N is always an int
     x_array=np.linspace(-well_length/2,well_length/2,N)
     V=potential(N)
 

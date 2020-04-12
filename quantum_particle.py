@@ -15,7 +15,7 @@ class q_particle:
         well_depth : float
             Minimum potential of the well.
         length : float
-            Distance over which the wavefunction is to be calculated.
+            Distance over which wavefunction ψ is to be calculated.
         steps : int
             Number of integration points used.
         start_position : TYPE, optional
@@ -42,7 +42,23 @@ class q_particle:
         self.gamma_sq=200                                #unitless constant
 
         
-    def next_psi(self,nu_array,n):  #n - iteration starts at 2
+    def next_psi(self,nu_array,n):
+        """
+        Performs a single step of the Numerov method to calculate the next required value of ψ
+
+        Parameters
+        ----------
+        nu_array : numpy.ndarray
+            Array of potential field.
+        n : int
+            Step number in Numerov method. NOTE: iteration starts at 2
+
+        Returns
+        -------
+        psi_n : numpy.float64
+            Calculated value of ψ.
+
+        """
         for nu in nu_array:
             if self.epsilon-nu<0:
                 print(self.epsilon,nu)
@@ -58,5 +74,6 @@ class q_particle:
         psi_n=(a-b)/c
         
         self.wavefunction=np.append(self.wavefunction,psi_n)
+        print(type(psi_n))
         return psi_n
 

@@ -10,9 +10,12 @@ import math
 norm=True
 comparison=True
 
-#print(wave_function_csv)
+
+"""
+Plots the wavefunction data produced by "wavefunction_generator.py"
+"""
 try:
-    wave_function_csv="wavefunctions_N=1000.csv"#listdir("wavefunctions")[0]  #temporary
+    wave_function_csv="wavefunctions_N=1000.csv"
     
 except:
     error("Unable to load"+str(wave_function_csv))
@@ -43,7 +46,12 @@ while 1:
 plt.tick_params(which='both',direction='in',right=True,top=True)
 plt.legend()
 
+
+
 if comparison==True:
+    """
+    Plots difference between the numerically calculated wavefunction and it's analytical counterpart
+    """
     plt.figure("Wavefunctions comparison")
     i=1 
     while i==1:

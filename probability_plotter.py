@@ -5,6 +5,22 @@ import pandas as pd
 from error import error
 
 def normalise(y_array,x_array):
+    """
+    Produces the normalisation constant for a given array
+
+    Parameters
+    ----------
+    y_array : numpy.ndarray
+        Array of y-axis values to be normalised.
+    x_array : numpy.ndarray
+        Array of corresponding x-axis values.
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
     integral=np.trapz(y_array**2,x=x_array)
     const=1/integral
     return const**0.5
@@ -12,11 +28,10 @@ def normalise(y_array,x_array):
 if __name__=="__main__":
 
     try:
-        wave_function_csv="wavefunctions_N=1000.csv"#listdir("wavefunctions")[0]  #temporary
+        wave_function_csv="wavefunctions_N=1000.csv"
         
     except:
         error("Unable to load"+str(wave_function_csv))
-    #print(str(wave_function_csv))
     data=pd.read_csv("wavefunctions\\"+str(wave_function_csv))
     N=len(data)
     
@@ -27,7 +42,6 @@ if __name__=="__main__":
         
     plt.xlabel(r"$\tilde{x}$")
     plt.ylabel(r"$|\psi(\tilde{x})|^2$")
-    #plt.plot(x_array,normalise(data[str(1)]**2), label="n="+str(1)) 
     i=1 
     while 1:
         try:      

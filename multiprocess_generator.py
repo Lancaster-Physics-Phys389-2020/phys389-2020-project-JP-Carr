@@ -7,6 +7,10 @@ simulations = 20 #Number of simulations to run (NOTE: Each successive simulation
 
 
 if __name__ == "__main__":  # Allows for the safe importing of the main module
+    """
+    Assigns child processes (wavefunction_generator.run()) to multiprocessing pool 
+    for multithreaded performance increase
+    """
     print("There are {} logical processors on this machine".format(mp.cpu_count()))
     print("Running {} simulations...".format(simulations))
     
