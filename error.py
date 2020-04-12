@@ -16,7 +16,7 @@ def error(message,_exit=True):
 
     """
     print("_______________________________________")
-    print("\033[31mERROR: "+message)
+    print("\033[33mERROR: "+message)
     if _exit==True:
         print("\a")
         from sys import exit
@@ -24,6 +24,3 @@ def error(message,_exit=True):
         
     else:
         print("\033[1;39;47m")
-        
-error("aesgeg",_exit=False)
-print("gyhnj")
