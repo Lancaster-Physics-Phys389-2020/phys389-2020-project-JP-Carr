@@ -5,3 +5,4 @@ def execute_before_any_test():
     from QHO import quantum_harmonic_oscilator 
     import wavefunction_generator 
     from analytical_E_levels import analytical_E
+    from probability_plotter import normalise
