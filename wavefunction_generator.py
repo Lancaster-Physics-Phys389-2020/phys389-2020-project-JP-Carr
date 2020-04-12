@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import copy
 import pandas as pd
 from error import error
-
+import time
 
 
 
@@ -116,6 +116,7 @@ def run(i):
     global x_array
     global V
     global energy_dict
+    start=time.time()
     N=round(i*50)
     x_array=np.linspace(-well_length/2,well_length/2,N)
     V=potential(N)
@@ -146,17 +147,20 @@ def run(i):
     energy_df.index.name=str(N)
     psi_df
     try:
-        pd.DataFrame.to_csv(energy_df, "energy_levels\energy_levels_N={}.csv".format(N))
+        pd.DataFrame.to_csv(energy_df, "energy_levels\\{}\\energy_levels_N={}.csv".format(V.form,N))
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
-        error("Unable to save \"energy_levels_N={}.csv\"",False)
+        print("energy_levels\\{}\\energy_levels_N={}.csv".format(V.form,N))
+        error("Unable to save \"energy_levels_N={}.csv\"".format(N),False)
     del energy_df
     try:
-        pd.DataFrame.to_csv(psi_df, "wavefunctions\wavefunctions_N={}.csv".format(N))
+        pd.DataFrame.to_csv(psi_df, "wavefunctions\\{}\\wavefunctions_N={}.csv".format(V.form,N))
         print("Saved \"wavefunctions_N={}.csv\"".format(N))
     except:
-        error("Unable to save \"wavefunctions_N={}.csv\"",False)
+        error("Unable to save \"wavefunctions_N={}.csv\"".format(N),False)
     del psi_df
+    
+    return N,time.time()-start
         
 if __name__=="__main__":
     run(N/50)
