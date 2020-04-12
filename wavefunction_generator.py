@@ -70,6 +70,24 @@ def WF_attempt(trial_E):
     return wave
     
 def E_finder(inital_E):
+    """
+    Iterates WF_attempt with changing energy until boundary condition ψ(L/2)=0 is met within tolerance
+
+    Parameters
+    ----------
+    inital_E : float
+        DESCRIPTION.
+
+    Returns
+    -------
+    trial_E : float
+        The energy eigenvalue of valid wavefuction.
+    test_wave : np.ndarray
+        Valid, non-normalised wavefunction.
+    n : int
+        Principal quantum number of wavefunction .
+
+    """
     trial_E=inital_E
     delta_E=trial_E/100
     best_psi=WF_attempt(trial_E)[-1]
@@ -106,6 +124,23 @@ def E_finder(inital_E):
     
     
 def run(i):
+    """
+    Finds wavefunctions of different quantum numbers.
+    Can be called as child for multiprocessing
+
+    Parameters
+    ----------
+    i : int
+        No. of intergration steps/50. Used to indicated process no. when multiprocessing.
+
+    Returns
+    -------
+    N : int
+        No. of intergration steps.
+    time_elapsed : float
+        Time taken to identify all valid wavefunctions in required range at a given N value.
+
+    """
     global N
     global x_array
     global V
@@ -144,8 +179,8 @@ def run(i):
     except:
         error("Unable to save \"wavefunctions_N={}.csv\"".format(N),False)
     del psi_df
-    
-    return N,time.time()-start
+    time_elapsed=time.time()-start
+    return N,time_elapsed
         
 if __name__=="__main__":
     run(N/50)
