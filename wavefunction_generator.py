@@ -1,7 +1,7 @@
 from potential_class import potential 
-from QHO import quantum_harmonic_oscilator 
+from quantum_particle import q_particle 
 import numpy as np
-import matplotlib.pyplot as plt
+
 import copy
 import pandas as pd
 from error import error
@@ -10,7 +10,6 @@ import time
 
 
 well_length=1
-start_E=0.21#0.95#065197799
 E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
 psi_tolerance=1E-12
 psi_dict={}
@@ -46,7 +45,7 @@ def turn_points(array):
     return n
 
 
-def WF_attempt(trial_E=start_E):
+def WF_attempt(trial_E):
     """
     Creates a Quantum Harmonic Oscillator object and attempts to 
     produce a valid wavefunction using Numerov's formula
@@ -54,38 +53,34 @@ def WF_attempt(trial_E=start_E):
     Parameters
     ----------
     trial_E : float, optional
-        The dimentionless energy for this attempt. The default is start_E.
+        The dimentionless energy for this attempt.
 
     Returns
     -------
-    QHO.wavefunction: numpy.ndarray
+    electron.wavefunction: numpy.ndarray
         Final wavefunction attempt.
 
     """
-    QHO=quantum_harmonic_oscilator(trial_E,V.V_depth(),well_length,N)
-  #  print("New wavefunction")
-    
+    electron=q_particle(trial_E,V.V_depth(),well_length,N)
+
     for i in range(2,N):
-    #    print("Loop  i = {}".format(i))
-        QHO.next_psi(V.nu(), i)
-    wave=copy.deepcopy(QHO.wavefunction)
-    del QHO
+        electron.next_psi(V.nu(), i)
+    wave=copy.deepcopy(electron.wavefunction)
+    del electron
     return wave
     
-def E_finder(inital_E=start_E):
+def E_finder(inital_E):
     trial_E=inital_E
     delta_E=trial_E/100
     best_psi=WF_attempt(trial_E)[-1]
     last_psi=copy.deepcopy(best_psi)
     
     while abs(best_psi)>psi_tolerance:
-     #   print("-----------------------")
-       # print("loop")
+
         trial_E+=delta_E
         test_wave=WF_attempt(trial_E)
         test_wave_L=test_wave[-1]
-    #    print("last ψ={}     trial ψ={}".format(last_psi,test_wave_L))
-   #     print("E = "+str(trial_E))
+
         
         
         if abs(test_wave_L)>abs(best_psi):
@@ -99,12 +94,11 @@ def E_finder(inital_E=start_E):
             if np.sign(test_wave_L)!=np.sign(last_psi):
                 delta_E=delta_E/2
        #         print("Overstep")
-                #best_psi=test_wave_L
+
         last_psi=copy.deepcopy(test_wave_L)
     else:
         n=turn_points(test_wave)
         print("Value found (n={}): \nE = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
-      #  print(turn_points(last_psi))
         energy_dict["n"].append(n)
         energy_dict["epsilon"].append(trial_E)
         psi_dict[str(n)]=test_wave
@@ -123,18 +117,9 @@ def run(i):
     energy_dict={"n":[], "epsilon":[]}
     print("running N={}".format(N))
     
-   # plt.figure("Wavefunctions (N = {})".format(N))
+
     for energy in E_list:
-        #print("loop")
         E,psi,n=E_finder(energy)
-     #   plt.plot(x_array,psi, label="n={}".format(n))
-    
-  #  plt.xlabel("x")
-   # plt.ylabel("ψ")
-    #plt.legend()
-    #plt.show()
-    
-    
     
     
     energy_df=pd.DataFrame(data=energy_dict)
