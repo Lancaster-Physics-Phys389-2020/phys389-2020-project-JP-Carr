@@ -29,7 +29,6 @@
 - **\wavefunctions** - directory for CSV file containing wavefunctions *ψ* for differenct values of *N*
 - **wavefunction_generator.py** - produces and finds valid wavefunction of a given "q_particle" object in a "potential" object potential, given a set of boundary conditions
 - **wavefunction_plotter.py** - normalises and plots the wavefunctions *ψ* produced by "wavefunction_plotter.py" and plots a comparison between *ψ* and the wavefunction produced by "analytical_psi.py"
--
 
 ## Required Modules
 -	Numpy
