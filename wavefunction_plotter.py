@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from os import listdir
+#from os import listdir
 import pandas as pd
 from error import error
 from probability_plotter import normalise
 from analytical_psi import psi as analytical_psi
-import math
+#import math
 
 norm=True
 comparison=True
