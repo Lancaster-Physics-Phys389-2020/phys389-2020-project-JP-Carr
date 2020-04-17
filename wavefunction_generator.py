@@ -1,26 +1,26 @@
 from potential_class import potential 
 from quantum_particle import q_particle 
 import numpy as np
-
 import copy
 import pandas as pd
 from error import error
-import time
 
 
-
-well_length=1
-E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9]
-psi_tolerance=1E-12
+well_length=1  #length of the potential well
+E_list=[0.9,0.8,0.5,0.2,-0.2,-0.7,-1.4,-2.1,-2.9,-3.9] # list of energy level starting points
+psi_tolerance=1E-12  # tolerance on boundary condition ψ(L/2)=0
 psi_dict={}
 
 
 if __name__=="__main__":
+    """
+    Setup if script is being run directly
+    """
     import time
-    start=time.time()
-    N=round(50*20) #ensures N is always an int
-    x_array=np.linspace(-well_length/2,well_length/2,N)
-    V=potential(N)
+    start=time.time() #begins timing
+    N=round(50)  #number of integration steps
+    x_array=np.linspace(-well_length/2,well_length/2,N) #array of positions
+    V=potential(N) #potential object
 
 
 def turn_points(array):
@@ -61,12 +61,12 @@ def WF_attempt(trial_E):
         Final wavefunction attempt.
 
     """
-    electron=q_particle(trial_E,V.V_depth(),well_length,N)
+    electron=q_particle(trial_E,V.V_depth(),well_length,N)  #create particle object
 
-    for i in range(2,N):
-        electron.next_psi(V.nu(), i)
+    for i in range(2,N):    # attempt to generate valid wavefunction with Numerov algorithm
+        electron.next_psi(V.nu(), i) 
     wave=copy.deepcopy(electron.wavefunction)
-    del electron
+    del electron  # delete object to save on memory during large operations
     return wave
     
 def E_finder(inital_E):
@@ -90,17 +90,19 @@ def E_finder(inital_E):
     """
     trial_E=inital_E
     delta_E=trial_E/100
-    best_psi=WF_attempt(trial_E)[-1]
-    last_psi=copy.deepcopy(best_psi)
+    best_psi=WF_attempt(trial_E)[-1]   # value of the best fulfilment of the ψ(L/2)=0 boundary condition
+    last_psi=copy.deepcopy(best_psi)  # ψ(L/2) for last attempt
     
-    while abs(best_psi)>psi_tolerance:
+    while abs(best_psi)>psi_tolerance: #loop until boundary condition is met within tolerance
 
         trial_E+=delta_E
         test_wave=WF_attempt(trial_E)
         test_wave_L=test_wave[-1]
 
         
-        
+        """
+        Guides energy level closer to meeting the ψ(L/2)=0 boundary condition
+        """
         if abs(test_wave_L)>abs(best_psi):
             delta_E=-delta_E
      #       print("Worse - Reversing direction")            
@@ -118,7 +120,7 @@ def E_finder(inital_E):
         n=turn_points(test_wave)
         print("Value found (n={}): \nE = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
         energy_dict["n"].append(n)
-        energy_dict["epsilon"].append(trial_E)
+        energy_dict["epsilon"].append(trial_E) #stores valid wavefunction and energy levels
         psi_dict[str(n)]=test_wave
         return trial_E,test_wave,n
     
@@ -165,16 +167,15 @@ def run(i):
         energy_df.drop(rfd,inplace=True)
     
     energy_df.index.name=str(N)
-    psi_df
     try:
-        pd.DataFrame.to_csv(energy_df, "energy_levels\\{}\\energy_levels_N={}.csv".format(V.form,N))
+        pd.DataFrame.to_csv(energy_df, "energy_levels\\energy_levels_N={}.csv".format(N))      # saves data in relavent csvs for storage
         print("Saved \"energy_levels_N={}.csv\"".format(N))
     except:
-        print("energy_levels\\{}\\energy_levels_N={}.csv".format(V.form,N))
+        print("energy_levels\\energy_levels_N={}.csv".format(N))
         error("Unable to save \"energy_levels_N={}.csv\"".format(N),False)
     del energy_df
     try:
-        pd.DataFrame.to_csv(psi_df, "wavefunctions\\{}\\wavefunctions_N={}.csv".format(V.form,N))
+        pd.DataFrame.to_csv(psi_df, "wavefunctions\\wavefunctions_N={}.csv".format(N))
         print("Saved \"wavefunctions_N={}.csv\"".format(N))
     except:
         error("Unable to save \"wavefunctions_N={}.csv\"".format(N),False)
@@ -182,7 +183,7 @@ def run(i):
     time_elapsed=time.time()-start
     return N,time_elapsed
         
-if __name__=="__main__":
+if __name__=="__main__": #does not trigger if process is controlled by multiprocessing parent script
     run(N/50)
-    print("Time elapsed = {}s".format(round(time.time()-start,2)))
+    print("Time elapsed = {}s".format(round(time.time()-start,2)))  #finishes process timing
     print("\a")

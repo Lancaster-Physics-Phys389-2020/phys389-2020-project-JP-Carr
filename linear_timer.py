@@ -1,5 +1,9 @@
 from wavefunction_generator import run
 import numpy as np
+"""
+Times "wavefunction_generator.py" at different values of N
+"""
+
 store=[[],[]]
 for i in range(1,31):
     N,t=run(i)

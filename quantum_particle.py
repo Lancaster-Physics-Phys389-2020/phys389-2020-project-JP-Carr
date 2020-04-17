@@ -11,7 +11,7 @@ class q_particle:
         Parameters
         ----------
         trial_energy : float
-            Energy of oscillator for current attempt.
+            Energy of particle for current attempt.
         well_depth : float
             Minimum potential of the well.
         length : float
@@ -21,7 +21,7 @@ class q_particle:
         start_position : TYPE, optional
             DESCRIPTION. The default is 0.
         mass : float, optional
-            DESCRIPTION. The default is const.m_e.
+            Mass of particle. The default is const.m_e.
 
         Returns
         -------
@@ -74,6 +74,6 @@ class q_particle:
         psi_n=(a-b)/c
         
         self.wavefunction=np.append(self.wavefunction,psi_n)
-        print(type(psi_n))
+    #    print(type(psi_n))
         return psi_n
 

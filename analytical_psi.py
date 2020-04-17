@@ -1,15 +1,37 @@
-
 from math import sin,pi
 import matplotlib.pyplot as plt
 import numpy as np
 from probability_plotter import normalise
 
-length=1
+length=1 #Length of potential well
+
 def psi(x_array,n,L):
+    """
+    Produces a wavefunction of an infinite square potential well
+
+    Parameters
+    ----------
+    x_array : numpy.ndarray
+        Array of positional values.
+    n : int
+        Principle quantum number.
+    L : float
+        Length of potential well.
+
+    Returns
+    -------
+    psi_norm : numpy.ndarray
+        Normalised wavefunction.
+
+    """
     psi=np.array([sin((x+length/2)*pi*n/L) for x in x_array]) #accounts for not starting at x=0
-    return psi*normalise(psi, x_array)
+    psi_norm=psi*normalise(psi, x_array) 
+    return psi_norm
 
 if __name__=="__main":
+    """
+    Plots wavefunction if script is run directly
+    """
     plt.figure("Analytical Wavefunctions")
     for n in range(1,11):
     

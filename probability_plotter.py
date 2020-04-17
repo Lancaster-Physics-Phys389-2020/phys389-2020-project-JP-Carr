@@ -26,6 +26,9 @@ def normalise(y_array,x_array):
     return const**0.5
 
 if __name__=="__main__":
+    """
+    Plots the normalised probability density when script is run directly
+    """
 
     try:
         wave_function_csv="wavefunctions_N=1000.csv"
@@ -45,7 +48,7 @@ if __name__=="__main__":
     i=1 
     while 1:
         try:      
-            prob=((normalise(data[str(i)],position_array))*data[str(i)])**2
+            prob=((normalise(data[str(i)],position_array))*data[str(i)])**2   # Normalises probability density
             plt.plot(position_array,prob, label="n="+str(i))
             i+=1
         except:

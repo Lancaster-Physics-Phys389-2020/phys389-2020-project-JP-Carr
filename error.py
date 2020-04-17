@@ -16,11 +16,11 @@ def error(message,_exit=True):
 
     """
     print("_______________________________________")
-    print("\033[33mERROR: "+message)
+    print("\033[33mERROR: "+message) #red text
     if _exit==True:
         print("\a")
         from sys import exit
         exit()
         
     else:
-        print("\033[1;39;47m")
+        print("\033[1;39;47m") #revert to default text style

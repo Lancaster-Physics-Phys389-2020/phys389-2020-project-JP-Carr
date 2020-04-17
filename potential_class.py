@@ -1,6 +1,4 @@
-#from sympy import symbols
-import numpy as np
-    
+import numpy as np    
         
 class potential:
     def __init__(self,steps,form="SW"):
