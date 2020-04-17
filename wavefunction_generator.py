@@ -118,7 +118,7 @@ def E_finder(inital_E):
         last_psi=copy.deepcopy(test_wave_L)
     else:
         n=turn_points(test_wave)
-        print("Value found (n={}): \nE = {}\n ψ(L) = {}\n".format(n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
+        print("N={} - Value found (n={}): \nE = {}\nψ(L) = {}\n".format(N,n,trial_E,best_psi))  #    ADD IN TURNING POINTS AND DATAFRAME
         energy_dict["n"].append(n)
         energy_dict["epsilon"].append(trial_E) #stores valid wavefunction and energy levels
         psi_dict[str(n)]=test_wave
