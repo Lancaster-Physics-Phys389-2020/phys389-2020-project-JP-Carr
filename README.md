@@ -31,16 +31,16 @@
 - **wavefunction_plotter.py** - normalises and plots the wavefunctions *ψ* produced by "wavefunction_plotter.py" and plots a comparison between *ψ* and the wavefunction produced by "analytical_psi.py"
 
 ## Required Modules
--	Numpy
--	Matplotlib
--	Pandas
--	Scipy
--	OS
--	Math
--	Multiprocessing
--	Time
--	Copy
--	Pytest
--	Sys
--	Random
+-	[Numpy](https://numpy.org/)
+-	[Matplotlib](https://matplotlib.org/)
+-	[Pandas](https://pandas.pydata.org/)
+-	[Scipy](https://www.scipy.org/)
+-	OS - Standard
+-	Math - Standard
+-	Multiprocessing - Standard
+-	Time - Standard
+-	Copy - Standard
+-	[Pytest](https://docs.pytest.org/en/latest/)
+-	Sys - Standard
+-	Random - Standard
 
