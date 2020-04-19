@@ -2,7 +2,7 @@
 
 ## Instructions
 - To generate a single set of wavefunctions *ψ* and energy eigenvalues *Eₙ*, run "wavefunction_generator.py", changing the value of "N" to the desired number of integration steps (NOTE: Increases in "*N*" increase run time exponentially). 
-- To generate a set of *ψ* and *Eₙ* results for multiple values of "*N*", run "multiprocess_generator.py" with "simulations" set to the number of desired simulations to be run. Simulation start at a value of *N=50*, which increase by 50 for each successive simulation.
+- To generate a set of *ψ* and *Eₙ* results for multiple values of "*N*", run "multiprocess_generator.py" with "simulations" set to the number of desired simulations to be run. Simulation start at a value of *N=50*, which increase by 50 for each successive simulation (NOTE: VS code recommended for monitoring this).
 - To view the generated wavefuncton *ψ* and its comparison to an analytically generated wavefunction run "wavefunction_plotter.py", changing the variable "wave_function_csv" to the path of the desired csv located in "phys389-2020-project-JP-Carr\wavefunctions".  
 - To view the comparisons of the numerically calculated energy eigenvalues *Eₙ* to their analytically generated counterparts, run "energy_comparison.py".
 
