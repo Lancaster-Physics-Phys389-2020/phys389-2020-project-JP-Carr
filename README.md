@@ -22,7 +22,7 @@
    - **test_analyticalE.py** - Performs checks on the "analytical_E" function from "analytical_E_levels.py"
    - **test_particle.py** - Performs checks on the functions contained in "quantum_particle.py" 
    - **test_potential.py** - Performs checks on the functions contained in "potential_class.py" 
-   - **test_probability.py** - Performs checks on the "normalise" function from "probability_plotter.py"
+   - **test_normalisation.py** - Performs checks on the "normalise" function from "probability_plotter.py"
    - **test_turning_points.py** - - Performs checks on the "turn_points" function from "wavefunction_generator.py"
    
 - **time_plotter.py** - plots data produced by "linear_timer.py"
