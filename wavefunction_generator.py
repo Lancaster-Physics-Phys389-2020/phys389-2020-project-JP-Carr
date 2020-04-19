@@ -18,7 +18,7 @@ if __name__=="__main__":
     Setup if script is being run directly
     """
     start=time.time() #begins timing
-    N=round(50*2)  #number of integration steps
+    N=round(1000)  #number of integration steps
     x_array=np.linspace(-well_length/2,well_length/2,N) #array of positions
     V=potential(N) #potential object
 
