@@ -4,6 +4,10 @@ from error import error
 
 
 class q_particle:
+    """
+    Describes the particles that forms part of the quantum system for which 
+    a wavefunction is calculated, using the Numerov method
+    """
     def __init__(self,trial_energy,well_depth,length,steps,start_position=0,mass=const.m_e):
         """
         Initialises a particle

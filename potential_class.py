@@ -2,6 +2,10 @@ import numpy as np
 from error import error
         
 class potential:
+    """
+    Describes the potential field that forms part of the quantum system for 
+    which a wavefunction is calculated
+    """
     def __init__(self,steps,form="SW"):
         """
         Initialises potential field and generates potential array
