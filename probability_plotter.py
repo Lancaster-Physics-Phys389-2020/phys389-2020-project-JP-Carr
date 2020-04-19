@@ -36,8 +36,8 @@ if __name__=="__main__":
     except:
         error("Unable to load"+str(wave_function_csv))
     data=pd.read_csv("wavefunctions\\"+str(wave_function_csv))
-    N=len(data)
-    
+    N=len(data)  # No. of integration steps
+     
     position_array=np.linspace(-1/2,1/2,N)
     
     
