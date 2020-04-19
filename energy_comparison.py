@@ -6,6 +6,10 @@ from error import error
 import numpy as np
 import math
 
+"""
+Compares energy levels produced by "wavefunction_generator.py" to those from "analytical_E_levels.py"
+"""
+
 all_csvs=listdir("energy_levels")
 for i in all_csvs:  #filters out non-csv files/directories from "phys389-2020-project-JP-Carr\energy_levels"
     if ".csv" not in i:

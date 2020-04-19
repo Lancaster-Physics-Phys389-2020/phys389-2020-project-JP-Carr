@@ -1,4 +1,5 @@
 import numpy as np    
+from error import error
         
 class potential:
     def __init__(self,steps,form="SW"):
@@ -22,6 +23,8 @@ class potential:
         
         if self.form=="SW":
             self.V=np.array([1 for i in range(steps)])
+        else:
+            error("The form \"{}\" is not currently defined".format(self.form))
    
         
     def V_depth(self):
@@ -30,8 +33,8 @@ class potential:
 
         Returns
         -------
-        min_V : float
-            The minimum potential value.
+        depth : float
+            The depth of the potential well.
 
         """
         depth=-np.max(self.V)

@@ -25,7 +25,7 @@ def psi(x_array,n,L):
 
     """
     psi=np.array([sin((x+length/2)*pi*n/L) for x in x_array]) #accounts for not starting at x=0
-    psi_norm=psi*normalise(psi, x_array) 
+    psi_norm=psi*normalise(psi, x_array)    #normalises array
     return psi_norm
 
 if __name__=="__main__":

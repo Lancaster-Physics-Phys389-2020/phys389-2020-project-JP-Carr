@@ -44,7 +44,8 @@ class q_particle:
         
     def next_psi(self,nu_array,n):
         """
-        Performs a single step of the Numerov method to calculate the next required value of ψ
+        Performs a single step of the Numerov method to calculate the next 
+        required value of ψ
 
         Parameters
         ----------
@@ -74,6 +75,6 @@ class q_particle:
         psi_n=(a-b)/c
         
         self.wavefunction=np.append(self.wavefunction,psi_n)
-    #    print(type(psi_n))
+        
         return psi_n
 

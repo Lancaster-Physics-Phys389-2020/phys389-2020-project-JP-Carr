@@ -57,7 +57,7 @@ def WF_attempt(trial_E):
 
     Returns
     -------
-    electron.wavefunction: numpy.ndarray
+    wave: numpy.ndarray
         Final wavefunction attempt.
 
     """
