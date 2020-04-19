@@ -28,7 +28,7 @@ def psi(x_array,n,L):
     psi_norm=psi*normalise(psi, x_array) 
     return psi_norm
 
-if __name__=="__main":
+if __name__=="__main__":
     """
     Plots wavefunction if script is run directly
     """
